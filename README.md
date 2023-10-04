@@ -29,8 +29,8 @@ The Wazuh Documentation is below:
 9. Changing managment configuration to turn on the Vulnerabilty detector. On the Wazuh Dashboard go to management the configuration and select edit configuration. Ensure the detecter is enabled, and enable the operating system types you will be using.
 10. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force, LOOK AT SS
 11. Deploying File integrity monitor. This is optional in your agents but if you want intergiry on your files you can add a FIM inside the agents. Located inside ossec.conf file you add the following settings:    <directories realtime="yes" report_changes="yes" check_all="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
-   The Wazuh Documentation is below:
-   [How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
+   
+   [Wazuh FIM Documentation](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 
 The SIEM is deployed and has agents with file integrity monitors and protection agaisint brute force. Now we are going to deploy our suricata IDS that send netowrk logs to our SIEM.
 
