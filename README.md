@@ -5,6 +5,7 @@
 
 <h2>Description</h2>
 Welcome to the Wazuh SIEM Environment project! This repository provides comprehensive documentation and resources to help you set up a open source SIEM(Security Information and Event Manager). A SIEM is a key tool for blue teamers, it allows for a centralized dashboard for collecting, analyzing, aggerating, and indexing security related data. Aiding in detecting intrustions, attacks, and vulnerabilities.
+
 <br />
 
 <h2>What You'll Find in This Repository</h2>
@@ -13,6 +14,7 @@ The Wazuh Documentation is below:
 
 [OVA File](https://documentation.wazuh.com/current/development/packaging/generate-ova.html)
 <br />
+
 <h2>Wazuh Walk Through</h2>
 
 1. In the Linode market place select the "Wazuh" App. Enter your email for the SSL cert. Create a Sudo user that can SSH into the Wazuh cloud. Upon deployment wait 5 minutes for Wazuh to configure.
