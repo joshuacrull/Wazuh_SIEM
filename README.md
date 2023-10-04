@@ -1,5 +1,6 @@
 <h1>Wazuh SIEM with Suricata IDS</h1>
 
+![Alt text](images/add_local_rules.png)
 
 
 <h2>Description</h2>
