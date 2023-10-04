@@ -51,8 +51,8 @@ The Wazuh Documentation is below:
 <br />   ![Alt text](images/FIM.png)
 <br />
 
-This is what the SIEM will display when a file has been changed inside the directory the FIM is deployed in.
- ![Alt text](images/FIM_Action.png)
+The below is what the SIEM will display when a file has been changed inside the directory the FIM is deployed in. <br />
+<br />   ![Alt text](images/FIM_Action.png)
 
 By following the previous steps the should be SIEM deployed with agents having file integrity monitors and protection agaisint brute force. Now we are going to deploy our suricata IDS that send network logs to our SIEM.
 
