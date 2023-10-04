@@ -19,8 +19,8 @@ The Wazuh Documentation is below:
 
 1. In the Linode market place select the "Wazuh" App. Enter your email for the SSL cert. Create a Sudo user that can SSH into the Wazuh cloud. Upon deployment wait 5 minutes for Wazuh to configure.
 2. SSH into Wazuh
-   When your machine is running open up a terminal and ssh into the machine.
-   "ssh root@xxx.xxx.xxx.xxx"
+   When your machine is running open up a terminal and ssh into the machine. <br />
+   -  ssh root@xxx.xxx.xxx.xxx
 3. Once you log into the Wazuh box you can run the following command to check for .deploymet-secerts.txt
    "ls -al"
 4. We need to view insde the text file so run the following command:
