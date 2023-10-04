@@ -33,7 +33,13 @@ The Wazuh Documentation is below:
     ![Alt text](images/Agent.png)
    <br />
 10. Changing managment configuration to turn on the Vulnerabilty detector. On the Wazuh Dashboard go to management the configuration and select edit configuration. Ensure the detecter is enabled, and enable the operating system types you will be using.
-11. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force, LOOK AT SS
+11. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force
+    #<active-response>
+         #<command>firewall-drop</command>
+         #<location>localhost</location>
+         #<rules_id>5710</rules_id>
+         #<timeout>1000</timeout>
+    #<active-response>
 ![Alt text](images/active_response.png)
 13. Deploying File integrity monitor. This is optional in your agents but if you want intergiry on your files you can add a FIM inside the agents. Located inside ossec.conf file you add the following settings:    <directories realtime="yes" report_changes="yes" check_all="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
 <br />
