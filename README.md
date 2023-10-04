@@ -48,7 +48,7 @@ The Wazuh Documentation is below:
 <br />
 
 
-![Alt text](images/FIM.png)
+<br />   ![Alt text](images/FIM.png)
 <br />
 
 This is what the SIEM will display when a file has been changed inside the directory the FIM is deployed in.
