@@ -37,7 +37,7 @@ The Wazuh Documentation is below:
 <br />
 - [Wazuh FIM Documentation](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 <br />
-![Alt text](images/FIM.png)
+ ![Alt text](images/FIM.png)
 <br />
 This is what the SIEM will display when a file has been changed inside the directory the FIM is deployed in.
  ![Alt text](images/FIM_Action.png)
