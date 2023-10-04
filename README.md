@@ -82,7 +82,7 @@ By following the previous steps the should be SIEM deployed with agents having f
    Write down interface name and IP subnet
 
 7.) We need to edit the suricata YAML file to edit the configuration
-      sudo nano /etc/suricata/suricata.yaml
+      <br /> - sudo nano /etc/suricata/suricata.yaml
 
 8.) Inside the file we need to change a few things. The first is your IP Range, set your IP range that you want to be monitored. 
 Next you have to change your interface name for AF-packet interface. Finaly add community_ID field to EVE records      
