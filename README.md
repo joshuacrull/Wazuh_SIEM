@@ -57,9 +57,9 @@ By following the previous steps the should be SIEM deployed with agents having f
 1.) Deploy a Ubuntu 22.04.1 server with a minimum of 2 CPU and 4 RAM.
 
 2.) To set up suricata install we need to run a few commands inside the ubuntu vm:
-      sudo apt-get install software-properties-common
-      sudo add-apt-repository ppa:oisf/suricata-stable
-      sudo apt-get update
+      - sudo apt-get install software-properties-common
+      - sudo add-apt-repository ppa:oisf/suricata-stable
+      - sudo apt-get update
 
 3.) Now install suricata with the following commmand:
       sudo apt-get install suricata
