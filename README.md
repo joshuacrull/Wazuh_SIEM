@@ -94,10 +94,25 @@ When you add the rule path to the local.rule file you can check for configuratio
 sudo suricata -T -c /etc/suricata/suricata.yaml -v
 ADD IMAGE
 
-Now that
-
-
-
+Now that our rules are added can we can test the IDS with two differnt tests:
+1.) running the command:
+      curl http://testmynids.org/uid/index.html
+   Which performs an HTTP GET request to a nids tester. We can see the IDS do its magic by running the following command:
+      sudo cat /var/log/suricata/fast.log
+      ADD IMAGE
+2.) Pinging our machine to test our ICMP Alert rule. 
+      ping xxx.xxx.xxx.xxx
+   We can see the results by running 
+      sudo cat /var/log/suricata/fast.log
+   ADD IMAGE
+   
+Now that we have our IDS deployed and configured we need to connected it to our SIEM. On the Wazuh add agent screen get the add agent command and use it on the suricata machine and start the Wazuh service.
+We then have to edit the ossec.conf file on both the suricata machine and the Wazuh manager configuration file. 
+At the bottom of both files we need to add the following:
+   <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/log/suricata/eve.json</location>
+   </localfile>
 <br/>
 
 <h2>Languages and Utilities Used</h2>
