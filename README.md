@@ -36,6 +36,67 @@ The SIEM is deployed and has agents with file integrity monitors and protecttion
 Suricata Deployment:
 Note* In my instructions I will be running suricata on Oracle Virtual Box on Ubuntu 22.04.1 server. 
 
+To set up the install we need to run a few commands inside the ubuntu vm:
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:oisf/suricata-stable
+sudo apt-get update
+
+Now install suricata with the following commmand:
+sudo apt-get install suricata
+
+Suricata is now installed onto your machine, we now want to update and upgrade with the following commands:
+sudo apt-get update
+sudo apt-get upgrade suricata
+
+Following the updates we need to turn suricata off so we can begin configuring: 
+Check the status of suricata with:
+sudo systemctl status suricata
+
+Turn off suricata with:
+sudo systemctl stop suricata
+
+We need to edit the suricata YAML file to edit the configuration.
+To check for the yaml file run the command:
+sudo ls -al /etc/suricata
+ADD RESULT PICTURE
+
+Before we edit the yaml file we need to find out interface name and IP range. You can find yours out by running:
+ip addr
+
+Begin editing configurations with the following command: 
+sudo nano /etc/suricata/suricata.yaml
+
+Inside the file we need to change a few things. The first is your IP Range, set your IP range that you want to be monitored. 
+The next thing is you have to change your interface name for AF-packet interface. 
+The last thing in the yaml file is you need to add community_ID field to EVE records
+
+Next we are going to want to update our rule sources, run the command:
+sudo suricata-update update-sources
+
+Now we are ready to create local rules for our IDS. First we have to make a rules directory with the following command:
+sudo mkdir /etc/suricata/rules
+
+Now that we have a rules directory we can make a rules file that we can call from. Use the following command:
+sudo nano /etc/suricata/rules/local.rules
+This will add a file name local.rules and inside of the file add the following rule:
+alert icmp any any -> $HOME_NET any (msg:"ICMP Ping"; sid:1; rev:1;)
+
+This Suricata rule is set to trigger an alert for ICMP (Internet Control Message Protocol) ping traffic. When an ICMP packet is detected from any source IP and any source port to any IP within the defined home network, an alert message labeled "ICMP Ping" will be generated. 
+
+Now we need to go back into the yaml file too add this rule set. Use the following command to enter the yaml file:
+sudo nano /etc/suricata/suricata.yaml
+
+Once insde the yaml file we need to add the location of the newly created rule file to the rule path. Hit ctl w to search for "rule-files" and add the file location:
+- /etc/suricata/rules/local.rules
+  ADD IMAGE
+
+When you add the rule path to the local.rule file you can check for configuration success with the following command:
+sudo suricata -T -c /etc/suricata/suricata.yaml -v
+ADD IMAGE
+
+Now that
+
+
 
 <br/>
 
