@@ -8,7 +8,7 @@ Welcome to the Wazuh SIEM Environment project! This repository provides comprehe
 
 <h2>What You''ll Find in This Repository</h2>
 Installation Guide: Step-by-step instructions to configure a Wazuh SIEM on your system, including system requirements and configuration details. In this guide I will be using Linode to host my Wazuh server. Other options are using AWS or a OVA file linked below:
-https://documentation.wazuh.com/current/development/packaging/generate-ova.html
+The Wazuh Documentation is below: [How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 
 
 <h2>Wazuh Walk Through</h2>
@@ -31,9 +31,9 @@ https://documentation.wazuh.com/current/development/packaging/generate-ova.html
    The Wazuh Documentation is below:
    https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html
 
-The SIEM is deployed and has agents with file integrity monitors and protecttion agaisint brute force. Now we are going to deploy our suricata IDS that send netowrk logs to our SIEM.
+The SIEM is deployed and has agents with file integrity monitors and protection agaisint brute force. Now we are going to deploy our suricata IDS that send netowrk logs to our SIEM.
 
-Suricata Deployment:
+<h2>Suricata Deployment:</h2>
 Note* In my instructions I will be running suricata on Oracle Virtual Box on Ubuntu 22.04.1 server. 
 
 To set up the install we need to run a few commands inside the ubuntu vm:
