@@ -11,7 +11,7 @@ Installation Guide: Step-by-step instructions to configure a Wazuh SIEM on your 
 The Wazuh Documentation is below: 
  - [How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 
-
+[How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 <h2>Wazuh Walk Through</h2>
 
 1. In the Linode market place select the "Wazuh" App. Enter your email for the SSL cert. Create a Sudo user that can SSH into the Wazuh cloud. Upon deployment wait 5 minutes for Wazuh to configure.
