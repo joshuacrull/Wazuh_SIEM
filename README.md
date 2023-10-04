@@ -102,8 +102,8 @@ This will add a file name local.rules and inside of the file add the following r
 
 This Suricata rule is set to trigger an alert for ICMP (Internet Control Message Protocol) ping traffic. When an ICMP packet is detected from any source IP and any source port to any IP within the defined home network, an alert message labeled "ICMP Ping" will be generated. 
 
-12.) Now go back into the yaml file too add this rule set. Use the following command to enter the yaml file:
-      sudo nano /etc/suricata/suricata.yaml
+12.) Now go back into the yaml file too add this rule set. Use the following command to enter the yaml file: <br />
+      -  sudo nano /etc/suricata/suricata.yaml
 
 13.) Once insde the yaml file we need to add the location of the newly created rule file to the rule path. Hit ctl w to search for "rule-files" and add the file location:
       - /etc/suricata/rules/local.rules
