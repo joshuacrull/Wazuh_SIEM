@@ -32,8 +32,9 @@ The Wazuh Documentation is below:
 11. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force, LOOK AT SS
 12. Deploying File integrity monitor. This is optional in your agents but if you want intergiry on your files you can add a FIM inside the agents. Located inside ossec.conf file you add the following settings:    <directories realtime="yes" report_changes="yes" check_all="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
    
-   [Wazuh FIM Documentation](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
- ![Alt text](images/FIM.png)
+[Wazuh FIM Documentation](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
+
+![Alt text](images/FIM.png)
 
 This is what the SIEM will display when a file has been changed inside the directory the FIM is deployed in.
  ![Alt text](images/FIM_Action.png)
@@ -91,11 +92,11 @@ This Suricata rule is set to trigger an alert for ICMP (Internet Control Message
 
 13.) Once insde the yaml file we need to add the location of the newly created rule file to the rule path. Hit ctl w to search for "rule-files" and add the file location:
       - /etc/suricata/rules/local.rules
-       ![Alt text](images/add_local_rules.png)
+![Alt text](images/add_local_rules.png)
 
 14.) When you add the rule path to the local.rule file you can check for configuration success with the following command:
       sudo suricata -T -c /etc/suricata/suricata.yaml -v
-  ![Alt text](images/suricata_up.png)
+![Alt text](images/suricata_up.png)
 
 15.) Now that our rules are added can we can test the IDS with two differnt tests:
       1.) running the command:
