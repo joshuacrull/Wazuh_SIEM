@@ -12,7 +12,7 @@ Installation Guide: Step-by-step instructions to configure a Wazuh SIEM on your 
 The Wazuh Documentation is below: 
 
 [OVA File](https://documentation.wazuh.com/current/development/packaging/generate-ova.html)
-
+<br />
 <h2>Wazuh Walk Through</h2>
 
 1. In the Linode market place select the "Wazuh" App. Enter your email for the SSL cert. Create a Sudo user that can SSH into the Wazuh cloud. Upon deployment wait 5 minutes for Wazuh to configure.
@@ -31,11 +31,11 @@ The Wazuh Documentation is below:
 10. Changing managment configuration to turn on the Vulnerabilty detector. On the Wazuh Dashboard go to management the configuration and select edit configuration. Ensure the detecter is enabled, and enable the operating system types you will be using.
 11. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force, LOOK AT SS
 12. Deploying File integrity monitor. This is optional in your agents but if you want intergiry on your files you can add a FIM inside the agents. Located inside ossec.conf file you add the following settings:    <directories realtime="yes" report_changes="yes" check_all="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
-   
+<br />
 [Wazuh FIM Documentation](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
-
+<br />
 ![Alt text](images/FIM.png)
-
+<br />
 This is what the SIEM will display when a file has been changed inside the directory the FIM is deployed in.
  ![Alt text](images/FIM_Action.png)
 
