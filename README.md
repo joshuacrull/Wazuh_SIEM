@@ -98,20 +98,20 @@ Next you have to change your interface name for AF-packet interface. Finaly add 
 This will add a file name local.rules and inside of the file add the following rule: <br />
       -  alert icmp any any -> $HOME_NET any (msg:"ICMP Ping"; sid:1; rev:1;)<br />
 
-![Alt text](images/suricata_add_rule.png)
+![Alt text](images/suricata_add_rule.png)   <br />
 
-This Suricata rule is set to trigger an alert for ICMP (Internet Control Message Protocol) ping traffic. When an ICMP packet is detected from any source IP and any source port to any IP within the defined home network, an alert message labeled "ICMP Ping" will be generated. 
+This Suricata rule is set to trigger an alert for ICMP (Internet Control Message Protocol) ping traffic. When an ICMP packet is detected from any source IP and any source port to any IP within the defined home network, an alert message labeled "ICMP Ping" will be generated. <br />
 
 12.) Now go back into the yaml file too add this rule set. Use the following command to enter the yaml file: <br />
       -  sudo nano /etc/suricata/suricata.yaml
 
-13.) Once insde the yaml file we need to add the location of the newly created rule file to the rule path. Hit ctl w to search for "rule-files" and add the file location:
-      - /etc/suricata/rules/local.rules
-![Alt text](images/add_local_rules.png)
+13.) Once insde the yaml file we need to add the location of the newly created rule file to the rule path. Hit ctl w to search for "rule-files" and add the file location: <br />
+      -  /etc/suricata/rules/local.rules   <br />
+<br />  ![Alt text](images/add_local_rules.png)  <br />
 
-14.) When you add the rule path to the local.rule file you can check for configuration success with the following command:
-      sudo suricata -T -c /etc/suricata/suricata.yaml -v
-![Alt text](images/suricata_up.png)
+14.) When you add the rule path to the local.rule file you can check for configuration success with the following command: <br />
+      sudo suricata -T -c /etc/suricata/suricata.yaml -v  <br />
+<br /> ![Alt text](images/suricata_up.png)  <br />
 
 15.) Now that our rules are added can we can test the IDS with two differnt tests:
       1.) running the command:
