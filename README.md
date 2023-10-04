@@ -8,7 +8,8 @@ Welcome to the Wazuh SIEM Environment project! This repository provides comprehe
 
 <h2>What You''ll Find in This Repository</h2>
 Installation Guide: Step-by-step instructions to configure a Wazuh SIEM on your system, including system requirements and configuration details. In this guide I will be using Linode to host my Wazuh server. Other options are using AWS or a OVA file linked below:
-The Wazuh Documentation is below: [How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
+The Wazuh Documentation is below: 
+ - [How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 
 
 <h2>Wazuh Walk Through</h2>
