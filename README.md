@@ -1,6 +1,6 @@
 <h1>Wazuh SIEM with Suricata IDS</h1>
 
-![Alt text](images/add_local_rules.png)
+
 
 
 <h2>Description</h2>
@@ -27,11 +27,16 @@ The Wazuh Documentation is below:
 6. Now we need to open the Wazuh dashboard. On linode find the Reverse DNS address for your user interface. Copy that into a web browser. Use username "admin" and the password found on step 5 to login.
 7. Now we need to add agents for our SIEM to monitor. On the wazuh dashboard navigate to Agents then Deploy new agent.
 8. To deploying an agent choose the proper Operating System, Version, Architecture, FQDN (this will be the address on your dashboard), name your agent, and give it a group to operate in.
-9. Changing managment configuration to turn on the Vulnerabilty detector. On the Wazuh Dashboard go to management the configuration and select edit configuration. Ensure the detecter is enabled, and enable the operating system types you will be using.
-10. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force, LOOK AT SS
-11. Deploying File integrity monitor. This is optional in your agents but if you want intergiry on your files you can add a FIM inside the agents. Located inside ossec.conf file you add the following settings:    <directories realtime="yes" report_changes="yes" check_all="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
+    ![Alt text](images/Agent.png)
+10. Changing managment configuration to turn on the Vulnerabilty detector. On the Wazuh Dashboard go to management the configuration and select edit configuration. Ensure the detecter is enabled, and enable the operating system types you will be using.
+11. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force, LOOK AT SS
+12. Deploying File integrity monitor. This is optional in your agents but if you want intergiry on your files you can add a FIM inside the agents. Located inside ossec.conf file you add the following settings:    <directories realtime="yes" report_changes="yes" check_all="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
    
    [Wazuh FIM Documentation](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
+ ![Alt text](images/FIM.png)
+
+This is what the SIEM will display when a file has been changed inside the directory the FIM is deployed in.
+ ![Alt text](images/FIM_Action.png)
 
 By following the previous steps the should be SIEM deployed with agents having file integrity monitors and protection agaisint brute force. Now we are going to deploy our suricata IDS that send network logs to our SIEM.
 
@@ -76,6 +81,9 @@ Next you have to change your interface name for AF-packet interface. Finaly add 
       sudo nano /etc/suricata/rules/local.rules
 This will add a file name local.rules and inside of the file add the following rule:
       alert icmp any any -> $HOME_NET any (msg:"ICMP Ping"; sid:1; rev:1;)
+
+       ![Alt text](images/suricata_add_rule.png)
+
 This Suricata rule is set to trigger an alert for ICMP (Internet Control Message Protocol) ping traffic. When an ICMP packet is detected from any source IP and any source port to any IP within the defined home network, an alert message labeled "ICMP Ping" will be generated. 
 
 12.) Now go back into the yaml file too add this rule set. Use the following command to enter the yaml file:
@@ -83,24 +91,24 @@ This Suricata rule is set to trigger an alert for ICMP (Internet Control Message
 
 13.) Once insde the yaml file we need to add the location of the newly created rule file to the rule path. Hit ctl w to search for "rule-files" and add the file location:
       - /etc/suricata/rules/local.rules
-       ADD IMAGE
+       ![Alt text](images/add_local_rules.png)
 
 14.) When you add the rule path to the local.rule file you can check for configuration success with the following command:
       sudo suricata -T -c /etc/suricata/suricata.yaml -v
-ADD IMAGE
+  ![Alt text](images/suricata_up.png)
 
 15.) Now that our rules are added can we can test the IDS with two differnt tests:
       1.) running the command:
             curl http://testmynids.org/uid/index.html
          Which performs an HTTP GET request to a nids tester. We can see the IDS do its magic by running the following command:
             sudo cat /var/log/suricata/fast.log
-      ADD IMAGE
       
       2.) Pinging our machine to test our ICMP Alert rule. 
             ping xxx.xxx.xxx.xxx
          We can see the results by running 
             sudo cat /var/log/suricata/fast.log
-      ADD IMAGE
+     In the following image inside the fast log you can see the ICMP traffic and the GET request:
+    ![Alt text](images/suricata_icmp_alert.png)
 
 
 <h2>Integrating Suricata Logs with Wazuh</h2>
@@ -113,15 +121,10 @@ At the bottom of both files we need to add the following:
       #<location>/var/log/suricata/eve.json</location>
    #</localfile>
 #<br/>
+ ![Alt text](images/eve_json.png)
 
-
-
-
-To check for the yaml file run the command:
-sudo ls -al /etc/suricata
-ADD RESULT PICTURE
-
-
+In the following image you can observe logs that the IDS has collected and the SIEM will display????
+ ![Alt text](images/final.png)
 
 
 <h2>Languages and Utilities Used</h2>
