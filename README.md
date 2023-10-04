@@ -9,9 +9,8 @@ Welcome to the Wazuh SIEM Environment project! This repository provides comprehe
 <h2>What You''ll Find in This Repository</h2>
 Installation Guide: Step-by-step instructions to configure a Wazuh SIEM on your system, including system requirements and configuration details. In this guide I will be using Linode to host my Wazuh server. Other options are using AWS or a OVA file linked below:
 The Wazuh Documentation is below: 
- - [How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
+[OVA File](https://documentation.wazuh.com/current/development/packaging/generate-ova.html)
 
-[How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 <h2>Wazuh Walk Through</h2>
 
 1. In the Linode market place select the "Wazuh" App. Enter your email for the SSL cert. Create a Sudo user that can SSH into the Wazuh cloud. Upon deployment wait 5 minutes for Wazuh to configure.
@@ -30,7 +29,7 @@ The Wazuh Documentation is below:
 10. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force, LOOK AT SS
 11. Deploying File integrity monitor. This is optional in your agents but if you want intergiry on your files you can add a FIM inside the agents. Located inside ossec.conf file you add the following settings:    <directories realtime="yes" report_changes="yes" check_all="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
    The Wazuh Documentation is below:
-   https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html
+   [How to Configure FIM](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 
 The SIEM is deployed and has agents with file integrity monitors and protection agaisint brute force. Now we are going to deploy our suricata IDS that send netowrk logs to our SIEM.
 
