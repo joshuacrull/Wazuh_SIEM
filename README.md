@@ -96,9 +96,9 @@ Next you have to change your interface name for AF-packet interface. Finaly add 
 11.) Now that we have a rules directory we can make a rules file that we can call from. Use the following command:
       sudo nano /etc/suricata/rules/local.rules
 This will add a file name local.rules and inside of the file add the following rule:
-      alert icmp any any -> $HOME_NET any (msg:"ICMP Ping"; sid:1; rev:1;)
+      alert icmp any any -> $HOME_NET any (msg:"ICMP Ping"; sid:1; rev:1;)<br />
 
-       ![Alt text](images/suricata_add_rule.png)
+![Alt text](images/suricata_add_rule.png)
 
 This Suricata rule is set to trigger an alert for ICMP (Internet Control Message Protocol) ping traffic. When an ICMP packet is detected from any source IP and any source port to any IP within the defined home network, an alert message labeled "ICMP Ping" will be generated. 
 
