@@ -30,7 +30,7 @@ The Wazuh Documentation is below:
 7. Now we need to add agents for our SIEM to monitor. On the wazuh dashboard navigate to Agents then Deploy new agent.
 8. To deploying an agent choose the proper Operating System, Version, Architecture, FQDN (this will be the address on your dashboard), name your agent, and give it a group to operate in.
    <br />
-    ![Alt text](images/Agent.png)
+    <br /> ![Alt text](images/Agent.png)
    <br />
 10. Changing managment configuration to turn on the Vulnerabilty detector. On the Wazuh Dashboard go to management the configuration and select edit configuration. Ensure the detecter is enabled, and enable the operating system types you will be using.
 11. Adding Active response to our SIEM. In the Managment configuration we need to create a rule to protect against brute force.<br />
