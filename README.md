@@ -32,89 +32,96 @@ The Wazuh Documentation is below:
    
    [Wazuh FIM Documentation](https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html)
 
-The SIEM is deployed and has agents with file integrity monitors and protection agaisint brute force. Now we are going to deploy our suricata IDS that send netowrk logs to our SIEM.
+By following the previous steps the should be SIEM deployed with agents having file integrity monitors and protection agaisint brute force. Now we are going to deploy our suricata IDS that send network logs to our SIEM.
 
 <h2>Suricata Deployment:</h2>
-Note* In my instructions I will be running suricata on Oracle Virtual Box on Ubuntu 22.04.1 server. 
 
-To set up the install we need to run a few commands inside the ubuntu vm:
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:oisf/suricata-stable
-sudo apt-get update
+1.) Deploy a Ubuntu 22.04.1 server with a minimum of 2 CPU and 4 RAM.
 
-Now install suricata with the following commmand:
-sudo apt-get install suricata
+2.) To set up suricata install we need to run a few commands inside the ubuntu vm:
+      sudo apt-get install software-properties-common
+      sudo add-apt-repository ppa:oisf/suricata-stable
+      sudo apt-get update
 
-Suricata is now installed onto your machine, we now want to update and upgrade with the following commands:
-sudo apt-get update
-sudo apt-get upgrade suricata
+3.) Now install suricata with the following commmand:
+      sudo apt-get install suricata
 
-Following the updates we need to turn suricata off so we can begin configuring: 
-Check the status of suricata with:
-sudo systemctl status suricata
+4.) With Suricata  installed on your machine, update and upgrade with the following commands:
+      sudo apt-get update
+      sudo apt-get upgrade suricata
 
-Turn off suricata with:
-sudo systemctl stop suricata
+5.) Check the status of suricata:
+      sudo systemctl status suricata
+    If needed turn suricata off so we can begin configuring: 
+      sudo systemctl stop suricata
 
-We need to edit the suricata YAML file to edit the configuration.
+6.) Gather network information by running:
+      ip addr
+   Write down interface name and IP subnet
+
+7.) We need to edit the suricata YAML file to edit the configuration
+      sudo nano /etc/suricata/suricata.yaml
+
+8.) Inside the file we need to change a few things. The first is your IP Range, set your IP range that you want to be monitored. 
+Next you have to change your interface name for AF-packet interface. Finaly add community_ID field to EVE records      
+
+9.) Next we are going to want to update our rule sources, run the command:
+      sudo suricata-update update-sources
+
+10.) Now a rules directory with the following command:
+      sudo mkdir /etc/suricata/rules
+
+11.) Now that we have a rules directory we can make a rules file that we can call from. Use the following command:
+      sudo nano /etc/suricata/rules/local.rules
+This will add a file name local.rules and inside of the file add the following rule:
+      alert icmp any any -> $HOME_NET any (msg:"ICMP Ping"; sid:1; rev:1;)
+This Suricata rule is set to trigger an alert for ICMP (Internet Control Message Protocol) ping traffic. When an ICMP packet is detected from any source IP and any source port to any IP within the defined home network, an alert message labeled "ICMP Ping" will be generated. 
+
+12.) Now go back into the yaml file too add this rule set. Use the following command to enter the yaml file:
+      sudo nano /etc/suricata/suricata.yaml
+
+13.) Once insde the yaml file we need to add the location of the newly created rule file to the rule path. Hit ctl w to search for "rule-files" and add the file location:
+      - /etc/suricata/rules/local.rules
+       ADD IMAGE
+
+14.) When you add the rule path to the local.rule file you can check for configuration success with the following command:
+      sudo suricata -T -c /etc/suricata/suricata.yaml -v
+ADD IMAGE
+
+15.) Now that our rules are added can we can test the IDS with two differnt tests:
+      1.) running the command:
+            curl http://testmynids.org/uid/index.html
+         Which performs an HTTP GET request to a nids tester. We can see the IDS do its magic by running the following command:
+            sudo cat /var/log/suricata/fast.log
+      ADD IMAGE
+      
+      2.) Pinging our machine to test our ICMP Alert rule. 
+            ping xxx.xxx.xxx.xxx
+         We can see the results by running 
+            sudo cat /var/log/suricata/fast.log
+      ADD IMAGE
+
+
+<h2>Integrating Suricata Logs with Wazuh</h2>
+
+Now that we have our IDS deployed and configured we need to connected it to our SIEM. On the Wazuh add agent screen get the add agent command and use it on the suricata machine and start the Wazuh service.
+We then have to edit the ossec.conf file on both the suricata machine and the Wazuh manager configuration file. 
+At the bottom of both files we need to add the following:
+   #<localfile>
+      #<log_format>syslog</log_format>
+      #<location>/var/log/suricata/eve.json</location>
+   #</localfile>
+#<br/>
+
+
+
+
 To check for the yaml file run the command:
 sudo ls -al /etc/suricata
 ADD RESULT PICTURE
 
-Before we edit the yaml file we need to find out interface name and IP range. You can find yours out by running:
-ip addr
 
-Begin editing configurations with the following command: 
-sudo nano /etc/suricata/suricata.yaml
 
-Inside the file we need to change a few things. The first is your IP Range, set your IP range that you want to be monitored. 
-The next thing is you have to change your interface name for AF-packet interface. 
-The last thing in the yaml file is you need to add community_ID field to EVE records
-
-Next we are going to want to update our rule sources, run the command:
-sudo suricata-update update-sources
-
-Now we are ready to create local rules for our IDS. First we have to make a rules directory with the following command:
-sudo mkdir /etc/suricata/rules
-
-Now that we have a rules directory we can make a rules file that we can call from. Use the following command:
-sudo nano /etc/suricata/rules/local.rules
-This will add a file name local.rules and inside of the file add the following rule:
-alert icmp any any -> $HOME_NET any (msg:"ICMP Ping"; sid:1; rev:1;)
-
-This Suricata rule is set to trigger an alert for ICMP (Internet Control Message Protocol) ping traffic. When an ICMP packet is detected from any source IP and any source port to any IP within the defined home network, an alert message labeled "ICMP Ping" will be generated. 
-
-Now we need to go back into the yaml file too add this rule set. Use the following command to enter the yaml file:
-sudo nano /etc/suricata/suricata.yaml
-
-Once insde the yaml file we need to add the location of the newly created rule file to the rule path. Hit ctl w to search for "rule-files" and add the file location:
-- /etc/suricata/rules/local.rules
-  ADD IMAGE
-
-When you add the rule path to the local.rule file you can check for configuration success with the following command:
-sudo suricata -T -c /etc/suricata/suricata.yaml -v
-ADD IMAGE
-
-Now that our rules are added can we can test the IDS with two differnt tests:
-1.) running the command:
-      curl http://testmynids.org/uid/index.html
-   Which performs an HTTP GET request to a nids tester. We can see the IDS do its magic by running the following command:
-      sudo cat /var/log/suricata/fast.log
-      ADD IMAGE
-2.) Pinging our machine to test our ICMP Alert rule. 
-      ping xxx.xxx.xxx.xxx
-   We can see the results by running 
-      sudo cat /var/log/suricata/fast.log
-   ADD IMAGE
-   
-Now that we have our IDS deployed and configured we need to connected it to our SIEM. On the Wazuh add agent screen get the add agent command and use it on the suricata machine and start the Wazuh service.
-We then have to edit the ossec.conf file on both the suricata machine and the Wazuh manager configuration file. 
-At the bottom of both files we need to add the following:
-   <localfile>
-      <log_format>syslog</log_format>
-      <location>/var/log/suricata/eve.json</location>
-   </localfile>
-<br/>
 
 <h2>Languages and Utilities Used</h2>
 
