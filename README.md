@@ -1,4 +1,4 @@
-<h1>Wazuh SIEM</h1>
+<h1>Wazuh SIEM with Suricata IDS</h1>
 
 
 
@@ -31,7 +31,10 @@ https://documentation.wazuh.com/current/development/packaging/generate-ova.html
    The Wazuh Documentation is below:
    https://documentation.wazuh.com/4.5/user-manual/capabilities/file-integrity/how-to-configure-fim.html
 
+The SIEM is deployed and has agents with file integrity monitors and protecttion agaisint brute force. Now we are going to deploy our suricata IDS that send netowrk logs to our SIEM.
 
+Suricata Deployment:
+Note* In my instructions I will be running suricata on Oracle Virtual Box on Ubuntu 22.04.1 server. 
 
 
 <br/>
